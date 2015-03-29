@@ -1,24 +1,29 @@
 <?php
 
 /**
- * tato třída má pomáhat lidem ,kteří nesnáší html. Plánuju verzi i pro css a rozšíření pro htmlhelper aby v něm byly všechny značky html. 
+ * @license BSD 
+ * Třída pro psaní webových stránek.
+ * Tato třída má pomáhat lidem ,kteří nesnáší html. Plánuju verzi i pro css a rozšíření pro htmlhelper aby v něm byly všechny značky html. 
  * @author Jaroslav Štefáček jaroslavstefacek@seznam.cz
  */
 class htmlhelp {
 
     /**
      *
-     * @var type $idlist obsahuje informace o všech id a class na celé stránce
-     * @var type do $idcounter se ukládá počet id a class na stránce  
+     * @var array $idlist obsahuje informace o všech id a class na celé stránce  
      */
     private $idlist = array();
+
+    /**
+     *
+     * @var integer do $idcounter se ukládá počet id a class na stránce 
+     */
     private $idcounter = 0;
 
     /**
-     * 
-     * @param type $id   hodnota class nebo id použitelná v css 
-     * @param type $type určuje zda se jedná o class nebo id
-     * tato metoda slouží pro zápis id a class do $idlist
+     * Tato metoda slouží pro zápis id a class do $idlist.
+     * @param string|integer $id   hodnota class nebo id použitelná v css 
+     * @param string $type určuje zda se jedná o class nebo id
      */
     public function idblbost($id, $type) {
         if ($id !== "") {
@@ -29,6 +34,7 @@ class htmlhelp {
     }
 
     /**
+     * Vipsání seznamu id a class.
      * tato metoda slouží pro výpis všech id a class na stránce (je možno vytvořit stránku a css řešit potom.hodí se to lidem co zapomínají 
      */
     public function idclasslist() {
@@ -36,16 +42,16 @@ class htmlhelp {
             echo"<br>";
             echo $this->idlist[$i][1];
             echo"-";
-            echo  $this->idlist[$i][2];
+            echo $this->idlist[$i][2];
         }
     }
 
     /**
-     * 
-     * @param type $lom určuje zda se jedná o koncoví tag nebo ne
-     * @param type $id hodnota class nebo id použitelná v css
-     * @param type $type určuje zda se jedná o class nebo id 
+     * Vytvoření začátku a konce html.
      * tato metoda vypisuje začátek html a konec. Je to rozdělené proměnnou lom aby bylo možné mezi tagy psát ručně tagy nebo generovat tagy přes htmlhelper
+     * @param string|integer $lom určuje zda se jedná o koncoví tag nebo ne
+     * @param string $id hodnota class nebo id použitelná v css
+     * @param string $type určuje zda se jedná o class nebo id  
      */
     public function html($lom = 0, $id = "", $type = "") {
         if ($lom === "/") {
@@ -58,12 +64,11 @@ class htmlhelp {
     }
 
     /**
-     * 
-     * @param type $lom určuje zda se jedná o koncoví tag nebo ne
-     * @param type $title když je vyplněný vípíše se odkaz se zadaným tittlem 
-     * @param type $charset pokud nějaký sebevrah nemá rád utf-8 může skusit windows kodování
-     * @param type $css adresa css bez koncovky pokud není vyplněna nic se nevypíše
-     * metoda pro vypsání hlavičky 
+     *  Metoda pro vypsání hlavičky. 
+     * @param string|integer $lom určuje zda se jedná o koncoví tag nebo ne
+     * @param string|integer $title když je vyplněný vípíše se odkaz se zadaným tittlem 
+     * @param string $charset pokud nějaký sebevrah nemá rád utf-8 může skusit windows kodování
+     * @param integer $css adresa css bez koncovky pokud není vyplněna nic se nevypíše
      */
     public function head($lom = 0, $title = 0, $charset = "UTF-8", $css = 0) {
         if ($lom === "/") {
@@ -81,11 +86,10 @@ class htmlhelp {
     }
 
     /**
-     * 
-     * @param type $lom určuje zda se jedná o koncoví tag nebo ne
-     * @param type $id hodnota class nebo id použitelná v css
-     * @param type $type určuje zda se jedná o class nebo id 
-     * metoda pro vysání body tagu
+     * Metoda pro vysání body tagu.
+     * @param string|integer $lom určuje zda se jedná o koncoví tag nebo ne
+     * @param string $id hodnota class nebo id použitelná v css
+     * @param string $type určuje zda se jedná o class nebo id 
      */
     public function body($lom = 0, $id = "", $type = "") {
         if ($lom === "/") {
@@ -97,11 +101,10 @@ class htmlhelp {
     }
 
     /**
-     * 
-     * @param type $param text do odstavce
-     * @param type $id hodnota class nebo id použitelná v css
-     * @param type $type určuje zda se jedná o class nebo id 
-     * metoda pro vypsání odstavce
+     * Metoda pro vypsání odstavce.
+     * @param string $param text do odstavce
+     * @param string $id hodnota class nebo id použitelná v css
+     * @param string $type určuje zda se jedná o class nebo id 
      */
     public function p($param, $id = "", $type = "") {
         echo '<p ' . $type . '="' . $id . '">';
@@ -111,12 +114,11 @@ class htmlhelp {
     }
 
     /**
-     * 
-     * @param type $param text nadpisu
-     * @param type $param2 velikost nadpisu 1 největší až 6 nejmenší
-     * @param type $id hodnota class nebo id použitelná v css
-     * @param type $type určuje zda se jedná o class nebo id 
-     * metoda pro psaní nadpisů
+     * Metoda pro psaní nadpisů.
+     * @param string $param text nadpisu
+     * @param integer $param2 velikost nadpisu 1 největší až 6 nejmenší
+     * @param string $id hodnota class nebo id použitelná v css
+     * @param string $type určuje zda se jedná o class nebo id 
      */
     public function h($param, $param2, $id = "", $type = "") {
         echo '<h' . $param2 . ' ' . $type . '="' . $id . '">';
@@ -126,9 +128,9 @@ class htmlhelp {
     }
 
     /**
-     * 
-     * @param type $lom určuje zda se jedná o koncoví tag nebo ne
+     * vypsaní centeru.
      * centrovací tag často nedoporučovaný ,ale bez něj bych nebyl css je horší  jak html
+     * @param string|integer $lom určuje zda se jedná o koncoví tag nebo ne
      */
     public function center($lom = 0) {
         if ($lom === "/") {
@@ -139,11 +141,10 @@ class htmlhelp {
     }
 
     /**
-     * 
-     * @param type $lom určuje zda se jedná o koncoví tag nebo ne
-     * @param type $id hodnota class nebo id použitelná v css
-     * @param type $type určuje zda se jedná o class nebo id 
-     * metoda pro uzavírání bloků html do divu 
+     * Metoda pro uzavírání bloků html do divu. 
+     * @param string|integer $lom určuje zda se jedná o koncoví tag nebo ne
+     * @param string $id hodnota class nebo id použitelná v css
+     * @param string $type určuje zda se jedná o class nebo id  
      */
     public function div($lom = 0, $id = "", $type = "") {
         if ($lom === "/") {
@@ -155,11 +156,10 @@ class htmlhelp {
     }
 
     /**
-     * 
-     * @param type $lom určuje zda se jedná o koncoví tag nebo ne 
-     * @param type $id hodnota class nebo id použitelná v css
-     * @param type $type určuje zda se jedná o class nebo id 
-     * metoda pro uzavírání bloků html do spanu
+     * Metoda pro uzavírání bloků html do spanu.
+     * @param string|integer $lom určuje zda se jedná o koncoví tag nebo ne 
+     * @param string $id hodnota class nebo id použitelná v css
+     * @param string $type určuje zda se jedná o class nebo id 
      */
     public function span($lom = 0, $id = "", $type = "") {
         if ($lom === "/") {
@@ -169,27 +169,25 @@ class htmlhelp {
             $this->idblbost($id, $type);
         }
     }
-    
+
     /**
-     * 
-     * @param type $seznam seznam hodnot oddělených čárkami
-     * @param type $typ ul nebo ol 
-     * @param type $id hodnota class nebo id použitelná v css
-     * @param type $type určuje zda se jedná o class nebo id 
-     * metoda pro výpis seznamů 
+     * Metoda pro výpis seznamů. 
+     * @param string $seznam seznam hodnot oddělených čárkami
+     * @param string $typ ul nebo ol 
+     * @param string $id hodnota class nebo id použitelná v css
+     * @param string $type určuje zda se jedná o class nebo id
      */
-    public function seznam($seznam,$typ,$id="",$type="") {
-        $pole=  explode(";", $seznam);
-        echo'<'.$typ.' ' . $type . '="' . $id . '">';
-        for($i=0;$i<count($pole);$i++){
+    public function seznam($seznam, $typ, $id = "", $type = "") {
+        $pole = explode(";", $seznam);
+        echo'<' . $typ . ' ' . $type . '="' . $id . '">';
+        for ($i = 0; $i < count($pole); $i++) {
             echo"<li>";
             echo $pole[$i];
             echo"</li>";
         }
-        echo'</'.$typ.'>';
+        echo'</' . $typ . '>';
         $this->idblbost($id, $type);
     }
-    
-    /* dodělat zbytek */
 
+    /* dodělat zbytek */
 }
